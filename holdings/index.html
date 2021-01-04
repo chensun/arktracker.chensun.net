@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQKQREKZGS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BQKQREKZGS');
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Ark, Invest, ETF, ARKK, ARKQ, ARKW, ARKG, ARKF, Trades, Holdings, Tracking">
+    <meta name="description" content="Ark Invest ETF holdings and trades tracking. Daily update.">
+
+    <title>Ark Tracker - Holdings</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../lib/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../lib/css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="container-fluid">
+
+      <h1>Ark Invest Active ETFs Holdings Tracker</h1>
+
+      <p>Tracking trades made by <a href="https://ark-funds.com/" target="_blank">ARK Invest</a>'s actively managed ETFs, including <a href="https://ark-funds.com/arkk" target="_blank">ARKK</a>, <a href="https://ark-funds.com/arkq" target="_blank">ARKQ</a>, <a href="https://ark-funds.com/arkw" target="_blank">ARKW</a>, <a href="https://ark-funds.com/arkg" target="_blank">ARKG</a>, <a href="https://ark-funds.com/arkf" target="_blank">ARKF</a>.</p>
+
+      <p>Also available: <a href="/">Ark Invest Active ETFs Trades Tracker</a>.</p>
+
+      <div id='table-container'></div>
+
+    </div><!-- /.container -->
+
+    <footer class='footer'>
+      <div class='container-fluid'>
+        <hr />
+        <p><b>DISCLAIMER:</b> This website and its author are not affiliated with <a href="https://ark-funds.com/" target="_blank">ARK Invest</a>. The author makes no warranty as to the accuracy, completeness, or reliability of any information available through the website.</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="../lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../lib/js/jquery.csv.min.js"></script>
+    <script type="text/javascript" src="../lib/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../lib/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="../lib/js/csv_to_html_table.js"></script>
+
+    <script type="text/javascript">
+      function format_ticker(ticker) {
+          if (ticker) {
+              return "<a href='https://finance.yahoo.com/quote/" + ticker + "' target='_blank'>" + ticker + "</a>";
+          }
+          return ticker;
+      }
+      function format_number(n) {
+          if (n) {
+              return n.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+          }
+          return n;
+      }
+      function format_dollar(n) {
+          if (n) {
+              return "$" + format_number(n);
+          }
+          return n;
+      }
+      function format_percentage(n) {
+          if (n) {
+              return format_number(n) + "%";
+          }
+          return n;
+      }
+
+      CsvToHtmlTable.init({
+        csv_path: '../data/ark-daily-holdings.csv',
+        element: 'table-container', 
+        allow_download: true,
+        csv_options: {separator: ',', delimiter: '"'},
+        datatables_options: {"paging": false},
+          custom_formatting: [
+              [3, format_ticker],
+              [5, format_number],
+              [6, format_dollar],
+              [7, format_percentage],
+          ]
+      });
+    </script>
+  </body>
+</html>
