@@ -62,13 +62,13 @@
     <script type="text/javascript" src="lib/js/csv_to_html_table.js"></script>
 
     <script type="text/javascript">
-      function format_direction_or_units(direction_or_units) {
-          if (direction_or_units === 'Buy' || direction_or_units > 0) {
-              return "<span style='color: #00873c;'>" + direction_or_units + "</span>";
-          } else if (direction_or_units === 'Sell' || direction_or_units < 0) {
-              return "<span style='color: #eb0f29;'>" + direction_or_units + "</span>";
+      function format_direction(direction) {
+          if (direction === 'Buy') {
+              return "<span style='color: #00873c;'>" + direction + "</span>";
+          } else if (direction === 'Sell') {
+              return "<span style='color: #eb0f29;'>" + direction + "</span>";
           }
-          return direction_or_units;
+          return direction;
       }
       function format_ticker(ticker) {
           if (ticker) {
@@ -102,9 +102,9 @@
         csv_options: {separator: ',', delimiter: '"'},
         datatables_options: {"paging": false},
           custom_formatting: [
-              [2, format_direction_or_units],
+              [2, format_direction],
               [3, format_ticker],
-              [5, format_direction_or_units, format_number],
+              [5, format_number],
               [6, format_number],
               [7, format_dollar],
               [8, format_percentage],
