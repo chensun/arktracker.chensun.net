@@ -68,7 +68,7 @@
       }
       function format_number(n) {
           if (n) {
-              return n.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+              return parseFloat(n).toLocaleString();
           }
           return n;
       }
